@@ -1,10 +1,11 @@
 //express async handler will help us check if the information from the req is undefined or not and will throw an error
 const asyncHandler = require('express-async-handler');
+const generateToken = require('../../config/generateJWT');
 const User = require('../../models/UserModel');
 
 const createUser = asyncHandler (async (req,res) =>{
 
-    const {name, email, password, pic } = req.body;
+    const {name, email, phone, password, pic } = req.body;
     if(!name || !email || !password){
         res.status(400);
         throw new Error("Please enter all the fields");
@@ -20,7 +21,7 @@ const createUser = asyncHandler (async (req,res) =>{
     }
 
     const user = await User.create({ //User.create is also a MongoDB query
-        name,email,password,pic
+        name,email,phone,password,pic
     });
 
     if(user){
@@ -28,6 +29,7 @@ const createUser = asyncHandler (async (req,res) =>{
             _id: user._id,
             name: user.name,
             email: user.email,
+            phone: user.phone,
             pic: user.pic,
             token:generateToken(user._id)
         });
