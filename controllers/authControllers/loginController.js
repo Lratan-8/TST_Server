@@ -1,6 +1,5 @@
-const express = require('express');
 
-const loginController = (req,res)=>{
+const loginController = async (req,res)=>{
 
     return res.send("This route and controller are working just fine")
 
