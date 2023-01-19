@@ -8,15 +8,16 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    phone: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
       unique: true
     },
-    phone: {
-      type: String,
-      required: true,
-    },
+
     password: {
       type: String,
       required: true,
@@ -30,12 +31,12 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.methods.matchPasswords = async function(enteredPassword){ //to check the password entered by the user while logging in is correct or not 
+userSchema.methods.matchPasswords = async function (enteredPassword) { //to check the password entered by the user while logging in is correct or not 
   return await bcrypt.compare(enteredPassword, this.password)
 }
 
-userSchema.pre('save',async function(next){ //to encrypt the password before saving it to the database
-  if(!this.isModified){
+userSchema.pre('save', async function (next) { //to encrypt the password before saving it to the database
+  if (!this.isModified) {
     next();
   }
 
