@@ -8,8 +8,9 @@ const PORT = process.env.PORT;
 const app = express(); //started the express server
 app.use(express.json()); //to accept the json data
 
-app.get('/', (req,res) => res.send("Home Page"));
+app.get('/', (req, res) => res.send("Home Page"));
 app.use('/api/auth', require('./routes/authenticationRoutes'));
+app.use('/api/users', require('./routes/usersAndChatsRouter'));
 
 app.use(notFound);
 app.use(errorHandler);
