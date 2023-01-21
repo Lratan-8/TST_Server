@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const User = require('../../models/UserModel')
 
-const fetchAllusers = asyncHandler(async (req, res) => {
+const fetchAllusersController = asyncHandler(async (req, res) => {
     const keyword = req.query.search ? {
         $or: [                                                      //$or is an operator of mongoDB - This means that you need to fulfill either one of these requests
             { name: { $regex: req.query.search, $options: "i" } },   //Request 1
@@ -17,4 +17,4 @@ const fetchAllusers = asyncHandler(async (req, res) => {
 
 });
 
-module.exports = fetchAllusers;
+module.exports = fetchAllusersController;
