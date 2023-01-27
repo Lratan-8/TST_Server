@@ -1,5 +1,6 @@
 const express = require('express');
 const createChatController = require('../controllers/users and chats controllers/chatControllers/createChatController');
+const fetchAllChats = require('../controllers/users and chats controllers/chatControllers/fetchChatsController');
 const fetchAllusersController = require('../controllers/users and chats controllers/fetchAllUsersController');
 const protect = require('../middlewares/authMiddleware');
 const router = express.Router();
@@ -11,7 +12,7 @@ router.get('/allusers', protect, fetchAllusersController); //protect is a middle
 router.post('/createchat', protect, createChatController);
 
 //router to fetch the chats done with a particular user
-// router.get('/fetchchathistory', protect);
+router.get('/fetchchats', protect, fetchAllChats);
 
 //router to create a group chat
 // router.post('/creategroupchat', protect);
